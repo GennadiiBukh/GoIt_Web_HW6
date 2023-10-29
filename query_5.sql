@@ -1,4 +1,5 @@
 --5.Знайти які курси читає певний викладач.
-SELECT subjects.name AS course_name
+SELECT subjects.name AS course_name, teachers.name AS teacher_name
 FROM subjects
-WHERE subjects.teacher_id = (SELECT id FROM teachers WHERE name = 'Трохим Влох') -- Зафіксоване ім'я викладача
+JOIN teachers ON subjects.teacher_id = teachers.id  
+WHERE subjects.teacher_id = 1 --'Певний викладач'

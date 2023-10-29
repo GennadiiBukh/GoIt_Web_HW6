@@ -11,7 +11,7 @@ try:
     with sqlite3.connect('university.db') as conn:
         cursor = conn.cursor()
 
-        # Створення таблиць
+        # Створення таблиці студентів
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS students (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,7 +20,8 @@ try:
                 FOREIGN KEY (group_id) REFERENCES groups(id)
             )
         ''')
-
+        
+        # Створення таблиці груп
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS groups (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,6 +29,7 @@ try:
             )
         ''')
 
+        # Створення таблиці викладачів
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS teachers (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,6 +37,7 @@ try:
             )
         ''')
 
+        # Створення таблиці предметів
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS subjects (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,6 +47,7 @@ try:
             )
         ''')
 
+        # Створення таблиці оцінок
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS grades (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -83,7 +87,7 @@ try:
         # Додавання оцінок з випадковими іменами студентів
         grades_data = []
         for student_id in range(1, 51):
-            for subject_id in range(1, 6):
+            for subject_id in range(1, 8):
                 student_name = students_data[student_id - 1][0]
                 grade = random.randint(60, 100)
                 date_received = fake.date_between(start_date="-1y", end_date="today")
